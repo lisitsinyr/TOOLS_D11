@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6146D9DC-DF65-41DD-881A-EA7198C9A4DE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SetINI\SetINI.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="GetINI\GetINI.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SetINI">
+        <MSBuild Projects="SetINI\SetINI.dproj"/>
+    </Target>
+    <Target Name="SetINI:Clean">
+        <MSBuild Projects="SetINI\SetINI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SetINI:Make">
+        <MSBuild Projects="SetINI\SetINI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GetINI">
+        <MSBuild Projects="GetINI\GetINI.dproj"/>
+    </Target>
+    <Target Name="GetINI:Clean">
+        <MSBuild Projects="GetINI\GetINI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GetINI:Make">
+        <MSBuild Projects="GetINI\GetINI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SetINI;GetINI"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SetINI:Clean;GetINI:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SetINI:Make;GetINI:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
